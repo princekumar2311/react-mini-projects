@@ -1,0 +1,31 @@
+import { useEffect, useState } from 'react'
+import './App.css'
+
+function App() {
+  const [time,setTime]=useState(new Date());
+
+  useEffect(()=>{
+    const timerId=setInterval(()=>{
+      setTime(new Date())
+    },1000)
+    return ()=> clearInterval(timerId);
+  },[])
+
+  const formettedTime=time.toLocaleTimeString('en-US',
+    {
+      hour:'2-digit',
+      minute:'2-digit',
+      second:'2-digit'
+    }
+  )
+  return (
+    <div className='clock-container'>
+      
+      <div className='clock'>
+        {formettedTime}
+      </div>
+    </div>
+  )
+}
+
+export default App
